@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { ctrlWrapper } = require("../../middlewares");
 const schema = require("../../validation/validation");
 const {
   listContacts,
@@ -9,98 +10,100 @@ const {
   updateContact,
 } = require("../../model/index");
 
-router.get("/", async (req, res, next) => {
-  const result = await listContacts();
+// router.get("/", async (req, res, next) => {
+//   const result = await listContacts();
 
-  res.status(200).json({
-    status: "success",
-    code: 200,
-    data: result,
-    message: "get",
-  });
-});
+//   res.status(200).json({
+//     status: "success",
+//     code: 200,
+//     data: result,
+//     message: "get",
+//   });
+// });
 
-router.get("/:contactId", async (req, res, next) => {
-  const { contactId } = req.params;
-  const result = await getById(contactId);
+router.get("/", ctrlWrapper());
 
-  if (!result) {
-    res.status(404).json({
-      status: "error",
-      code: 404,
-      message: `Contact with id=${contactId} not found`,
-    });
-  }
+// router.get("/:contactId", async (req, res, next) => {
+//   const { contactId } = req.params;
+//   const result = await getById(contactId);
 
-  res.status(200).json({
-    status: "success",
-    code: 200,
-    message: "get by ID",
-    data: result,
-  });
-});
+//   if (!result) {
+//     res.status(404).json({
+//       status: "error",
+//       code: 404,
+//       message: `Contact with id=${contactId} not found`,
+//     });
+//   }
 
-router.post("/", async (req, res, next) => {
-  try {
-    const body = await schema.validateAsync(req.body);
-    console.log("body", body);
-    const result = await addContact(body);
+//   res.status(200).json({
+//     status: "success",
+//     code: 200,
+//     message: "get by ID",
+//     data: result,
+//   });
+// });
 
-    if (!result) {
-      res.status(400).json({
-        code: 400,
-        message: "missing required name field",
-      });
-    }
-    res.status(200).json({
-      status: "success",
-      code: 201,
-      message: "POST",
-      data: result,
-    });
-  } catch (error) {
-    res.status(400).json({
-      code: 400,
-      message: `${error}`,
-    });
-  }
-});
+// router.post("/", async (req, res, next) => {
+//   try {
+//     const body = await schema.validateAsync(req.body);
+//     console.log("body", body);
+//     const result = await addContact(body);
 
-router.delete("/:contactId", async (req, res, next) => {
-  const { contactId } = req.params;
-  const result = await removeContact(contactId);
+//     if (!result) {
+//       res.status(400).json({
+//         code: 400,
+//         message: "missing required name field",
+//       });
+//     }
+//     res.status(200).json({
+//       status: "success",
+//       code: 201,
+//       message: "POST",
+//       data: result,
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       code: 400,
+//       message: `${error}`,
+//     });
+//   }
+// });
 
-  if (!result) {
-    res.status(404).json({
-      status: "error",
-      code: 404,
-      message: `Contact with id=${contactId} not found`,
-    });
-  }
+// router.delete("/:contactId", async (req, res, next) => {
+//   const { contactId } = req.params;
+//   const result = await removeContact(contactId);
 
-  res.status(200).json({
-    status: "success",
-    code: 200,
-    message: "contact deleted",
-    data: result,
-  });
-});
+//   if (!result) {
+//     res.status(404).json({
+//       status: "error",
+//       code: 404,
+//       message: `Contact with id=${contactId} not found`,
+//     });
+//   }
 
-router.put("/:contactId", async (req, res, next) => {
-  const { contactId } = req.params;
+//   res.status(200).json({
+//     status: "success",
+//     code: 200,
+//     message: "contact deleted",
+//     data: result,
+//   });
+// });
 
-  try {
-    const body = await schema.validateAsync(req.body);
-    const result = await updateContact(contactId, body);
+// router.put("/:contactId", async (req, res, next) => {
+//   const { contactId } = req.params;
 
-    if (!result) {
-      res.status(400).json({ message: "missing fields" });
-    }
+//   try {
+//     const body = await schema.validateAsync(req.body);
+//     const result = await updateContact(contactId, body);
 
-    res.status(200).json({ status: "success", message: "PUT", data: result });
-  } catch (error) {
-    res.status(400).json({ message: `${error}` });
-  }
-});
+//     if (!result) {
+//       res.status(400).json({ message: "missing fields" });
+//     }
+
+//     res.status(200).json({ status: "success", message: "PUT", data: result });
+//   } catch (error) {
+//     res.status(400).json({ message: `${error}` });
+//   }
+// });
 
 module.exports = router;
