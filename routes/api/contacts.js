@@ -1,27 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { ctrlWrapper } = require("../../middlewares");
-const schema = require("../../validation/validation");
-const {
-  listContacts,
-  getById,
-  removeContact,
-  addContact,
-  updateContact,
-} = require("../../model/index");
+const { listContacts } = require("../../controllers");
 
-// router.get("/", async (req, res, next) => {
-//   const result = await listContacts();
-
-//   res.status(200).json({
-//     status: "success",
-//     code: 200,
-//     data: result,
-//     message: "get",
-//   });
-// });
-
-router.get("/", ctrlWrapper());
+router.get("/", ctrlWrapper(listContacts));
 
 // router.get("/:contactId", async (req, res, next) => {
 //   const { contactId } = req.params;

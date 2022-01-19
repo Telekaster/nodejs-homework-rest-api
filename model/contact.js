@@ -20,7 +20,6 @@ const contactSchema = Schema(
   },
   { versionKey: false, timestamps: true }
 );
-
 const Contact = model("contacts", contactSchema);
 
 const joiSchema = Joi.object({

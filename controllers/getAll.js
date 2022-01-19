@@ -1,7 +1,10 @@
-const listContacts = async () => {
-  const data = await fs.readFile(contactsPath);
-  const result = JSON.parse(data.toString());
-  return result;
+const { Contact } = require("../model/contact");
+
+const listContacts = async (req, res) => {
+  console.log(Contact);
+  const data = await Contact.find({});
+
+  res.json({ status: "success", code: 200, data: { contacts: data } });
 };
 
 // const getById = async (contactId) => {
@@ -65,10 +68,4 @@ const listContacts = async () => {
 //   return refreshContact;
 // };
 
-module.exports = {
-  listContacts,
-  getById,
-  removeContact,
-  addContact,
-  updateContact,
-};
+module.exports = listContacts;
