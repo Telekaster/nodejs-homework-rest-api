@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { ctrlWrapper } = require("../../middlewares");
-const { listContacts } = require("../../controllers");
+const { ctrlWrapper, validation } = require("../../middlewares");
+const { getAll, getById, removeById, add } = require("../../controllers");
+const { joiSchema } = require("../../model/contact");
 
-router.get("/", ctrlWrapper(listContacts));
+router.get("/", ctrlWrapper(getAll));
+router.get("/:id", ctrlWrapper(getById));
+router.delete("/:id", ctrlWrapper(removeById));
+router.post("/", validation(joiSchema), ctrlWrapper(add));
 
 // router.get("/:contactId", async (req, res, next) => {
 //   const { contactId } = req.params;
