@@ -1,8 +1,10 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const contactSchema = Schema(
   {
+    _id: mongoose.Schema.Types.ObjectId,
     name: {
       type: String,
       required: [true, "Set name for contact"],
@@ -20,6 +22,7 @@ const contactSchema = Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
 const Contact = model("contacts", contactSchema);
 
 const joiSchema = Joi.object({

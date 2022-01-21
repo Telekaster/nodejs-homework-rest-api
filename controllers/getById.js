@@ -2,7 +2,8 @@ const { Contact } = require("../model/contact");
 const { NotFound } = require("http-errors");
 
 const getById = async (req, res) => {
-  const data = await Contact.findOne({ _id: req.params.id });
+  const { id } = req.params;
+  const data = await Contact.findOne({ id });
 
   if (!data) {
     throw new NotFound("Not found");
