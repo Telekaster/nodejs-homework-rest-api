@@ -8,7 +8,7 @@ const {
   add,
   updateById,
   updateStatusContact,
-} = require("../../controllers");
+} = require("../../controllers/contacts");
 const { joiSchema, favoriteJoiSchema } = require("../../model/contact");
 
 router.get("/", ctrlWrapper(getAll));
@@ -21,6 +21,5 @@ router.patch(
   validation(favoriteJoiSchema),
   ctrlWrapper(updateStatusContact)
 );
-
 
 module.exports = router;
