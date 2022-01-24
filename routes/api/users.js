@@ -9,8 +9,8 @@ router.post(
   validation(joiRegisterSchema),
   ctrlWrapper(user.register)
 );
-
 router.post("/login", validation(joiLoginSchema), ctrlWrapper(user.login));
 router.get("/current", auth, ctrlWrapper(user.getCurrent));
+router.get("/logout", auth, ctrlWrapper(user.logout));
 
 module.exports = router;
