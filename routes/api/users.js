@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const { ctrlWrapper, validation } = require("../../middlewares");
-const models = require("../../model");
+const { joiRegisterSchema, joiLoginSchema } = require("../../model/user");
 const auth = require("../../controllers/auth");
-console.log(auth);
-console.log("joiRegisterSchema", models.User.joiRegisterSchema);
+
 router.post(
   "/signup",
-  validation(models.User.joiRegisterSchema),
+  validation(joiRegisterSchema),
   ctrlWrapper(auth.register)
 );
+
+router.post("/login", validation(joiLoginSchema), ctrlWrapper(auth.login));
 
 module.exports = router;
