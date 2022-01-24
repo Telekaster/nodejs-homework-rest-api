@@ -12,12 +12,13 @@ const {
 const { joiSchema, favoriteJoiSchema } = require("../../model/contact");
 
 router.get("/", auth, ctrlWrapper(getAll));
-router.get("/:id", ctrlWrapper(getById));
-router.delete("/:id", ctrlWrapper(removeById));
+router.get("/:id", auth, ctrlWrapper(getById));
+router.delete("/:id", auth, ctrlWrapper(removeById));
 router.post("/", auth, validation(joiSchema), ctrlWrapper(add));
-router.put("/:id", validation(joiSchema), ctrlWrapper(updateById));
+router.put("/:id", auth, validation(joiSchema), ctrlWrapper(updateById));
 router.patch(
   "/:id/favorite",
+  auth,
   validation(favoriteJoiSchema),
   ctrlWrapper(updateStatusContact)
 );
