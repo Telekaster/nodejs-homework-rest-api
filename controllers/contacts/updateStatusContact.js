@@ -1,4 +1,4 @@
-const { Contact } = require("../model/contact");
+const { Contact } = require("../../model/contact");
 const { NotFound } = require("http-errors");
 const { BadRequest } = require("http-errors");
 const mongoose = require("mongoose");
@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const updateStatusContact = async (req, res) => {
   const { id } = req.params;
   const { favorite } = req.body;
+  const ownerId = req.user._id;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new Error("id is not valid");
@@ -16,7 +17,7 @@ const updateStatusContact = async (req, res) => {
   }
 
   const data = await Contact.findByIdAndUpdate(
-    id,
+    { _id: id, owner: ownerId },
     { favorite },
     {
       new: true,

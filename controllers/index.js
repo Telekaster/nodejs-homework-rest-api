@@ -1,9 +1,10 @@
-const getAll = require("./getAll");
-const getById = require("./getById");
-const removeById = require("./removeById");
-const add = require("./add");
-const updateById = require("./updateById");
-const updateStatusContact = require("./updateStatusContact");
+const getAll = require("./contacts");
+const getById = require("./contacts");
+const removeById = require("./contacts");
+const add = require("./contacts");
+const updateById = require("./contacts");
+const updateStatusContact = require("./contacts");
+const register = require("./auth");
 
 module.exports = {
   getAll,
@@ -12,4 +13,5 @@ module.exports = {
   add,
   updateById,
   updateStatusContact,
+  register,
 };
