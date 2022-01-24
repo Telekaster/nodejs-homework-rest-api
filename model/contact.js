@@ -1,10 +1,9 @@
-const { Schema, SchemaTypes, model } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const contactSchema = Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
     name: {
       type: String,
       required: [true, "Set name for contact"],
@@ -20,7 +19,7 @@ const contactSchema = Schema(
       default: false,
     },
     owner: {
-      type: SchemaTypes.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "user",
     },
   },
