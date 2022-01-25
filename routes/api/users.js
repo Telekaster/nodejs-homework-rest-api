@@ -22,7 +22,6 @@ router.patch(
   "/avatars",
   auth,
   upload.single("avatar"),
-  // upload,
   format,
   ctrlWrapper(user.setAvatar)
 );

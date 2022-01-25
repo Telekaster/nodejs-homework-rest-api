@@ -1,3 +1,5 @@
+// middlewares/format.js (прослойка для форматирования и пересохранения)
+// Jimp пакет для обработки изображений
 const Jimp = require("jimp");
 const { v4 } = require("uuid");
 const { TEMP_DIR, FILE_DIR } = require("../service/avatarDir");
