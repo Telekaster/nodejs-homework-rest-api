@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
-const FILE_DIR = path.resolve("./public");
-console.log("FILE_DIR", FILE_DIR);
+// const path = require("path");
+// const FILE_DIR = path.resolve("./public");
 
-router.get("/download", express.static(FILE_DIR));
+// router.use("/download", express.static(FILE_DIR));
 
 module.exports = router;
