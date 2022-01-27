@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
-const { bool } = require("joi");
 
 const userSchema = Schema(
   {

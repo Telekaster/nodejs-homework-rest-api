@@ -10,7 +10,13 @@ const login = async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if (!user) {
+  if (!user.confirmed) {
+    throw new Unauthorized(
+      "Please confirm your registration. Instructions sended to you email"
+    );
+  }
+
+  if (!user.confirmed) {
     throw new Unauthorized("Email or password is wrong");
   }
 
