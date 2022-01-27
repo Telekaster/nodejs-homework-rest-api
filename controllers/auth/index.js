@@ -4,6 +4,7 @@ const getCurrent = require("./getCurrent");
 const logout = require("./logout");
 const setAvatar = require("./setAvatar");
 const confirmation = require("./cofirmation");
+const sendAgain = require("./sendAgain");
 
 module.exports = {
   register,
@@ -12,4 +13,5 @@ module.exports = {
   logout,
   setAvatar,
   confirmation,
+  sendAgain,
 };

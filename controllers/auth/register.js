@@ -4,7 +4,8 @@ const { Conflict } = require("http-errors");
 // Пакет для генерации аватара
 const gravatar = require("gravatar");
 // для отправки почты
-const transporter = require("../../service/nodeMailer");
+const transporter = require("../../service/email/nodeMailer");
+const emailOptions = require("../../service/email/emailOptions");
 const { v4 } = require("uuid");
 
 const register = async (req, res) => {
@@ -17,15 +18,8 @@ const register = async (req, res) => {
 
   const confirmationLink = v4();
 
-  const emailOptions = {
-    from: "oleg.your.bondarenko@meta.ua",
-    to: email,
-    subject: "Registration confirmation",
-    text: `To finish your registration please click on this link: http://localhost:3000/api/users/verify/${confirmationLink}`,
-  };
-
   transporter
-    .sendMail(emailOptions)
+    .sendMail(emailOptions(email, confirmationLink))
     .then((info) => console.log(info))
     .catch((err) => console.log(err));
 

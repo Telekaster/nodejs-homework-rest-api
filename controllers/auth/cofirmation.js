@@ -9,7 +9,7 @@ const confirmation = async (req, res) => {
       status: "error",
       code: 404,
       data: {
-        message: "Registration already confirmed or user not found",
+        message: "User not found",
       },
     });
   } else {
