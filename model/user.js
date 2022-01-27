@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+const { bool } = require("joi");
 
 const userSchema = Schema(
   {
@@ -22,6 +23,8 @@ const userSchema = Schema(
       default: null,
     },
     avatarURL: { type: String },
+    confirmationLink: { type: String, required: true },
+    confirmed: { type: Boolean, default: false },
   },
   { versionKey: false, timestamps: true }
 );
