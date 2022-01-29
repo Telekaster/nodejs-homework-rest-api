@@ -22,6 +22,8 @@ const userSchema = Schema(
       default: null,
     },
     avatarURL: { type: String },
+    confirmationLink: { type: String, required: true },
+    confirmed: { type: Boolean, default: false },
   },
   { versionKey: false, timestamps: true }
 );

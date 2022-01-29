@@ -25,5 +25,7 @@ router.patch(
   format,
   ctrlWrapper(user.setAvatar)
 );
+router.post("/verify", ctrlWrapper(user.sendAgain));
+router.get("/verify/:confirmationLink", ctrlWrapper(user.confirmation));
 
 module.exports = router;
